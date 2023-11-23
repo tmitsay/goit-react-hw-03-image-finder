@@ -21,6 +21,7 @@ export class ImageGallery extends Component {
     try {
       this.setState({ isLoading: true });
       const data = await getImages(this.props.value);
+      // console.log(data);
       this.setState({ images: data, isLoading: false });
     } catch (error) {
       this.setState({ error: 'Sorry image not found...', isLoading: false });
@@ -49,6 +50,7 @@ export class ImageGallery extends Component {
     return (
       <>
         {isLoading && <Loader />}
+
         {
           <ul className={css.gallery}>
             {images.map(image => {

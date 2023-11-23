@@ -1,17 +1,13 @@
-import css from './Modal.module.css';
 import { Component } from 'react';
+import css from './Modal.module.css';
 
 export class Modal extends Component {
   backDropClose = event => {
-    if (event.target === event.currentTarget) {
-      this.props.close();
-    }
+    event.target === event.currentTarget && this.props.onClose();
   };
 
   onEscClose = event => {
-    if (event.code === 'Escape') {
-      this.props.close();
-    }
+    event.code === 'Escape' && this.props.onClose();
   };
 
   componentDidMount() {
@@ -23,9 +19,9 @@ export class Modal extends Component {
   }
 
   render() {
-    const { close } = this.props;
+    // const { close } = this.props;
     return (
-      <div onClick={close} className={css.overlay}>
+      <div onClick={this.backDropClose} className={css.overlay}>
         <div className={css.modal}>
           <img src={this.props.currentImage} alt="" />
         </div>

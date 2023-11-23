@@ -34,11 +34,13 @@ export class App extends Component {
     const { isModalOpen, searchValue, currentImage, error } = this.state;
     return (
       <div className={css.app}>
-        <Searchbar submit={this.onSubmit} />
+        <Searchbar onSubmit={this.onSubmit} />
 
         {error && <h2>{error}</h2>}
         <ImageGallery value={searchValue} onClick={isModalOpen} />
-        <Modal onClick={this.toggleModal} currentImage={currentImage} />
+        {isModalOpen && (
+          <Modal onClose={this.toggleModal} currentImage={currentImage} />
+        )}
       </div>
     );
   }
