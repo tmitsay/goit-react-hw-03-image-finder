@@ -3,7 +3,9 @@ import css from './Modal.module.css';
 
 export class Modal extends Component {
   backDropClose = event => {
-    event.target === event.currentTarget && this.props.onClose();
+    if (event.target === event.currentTarget) {
+      this.props.onClose();
+    }
   };
 
   onEscClose = event => {
@@ -19,11 +21,11 @@ export class Modal extends Component {
   }
 
   render() {
-    // const { close } = this.props;
+    const { largeImageURL, tags } = this.props;
     return (
       <div onClick={this.backDropClose} className={css.overlay}>
         <div className={css.modal}>
-          <img src={this.props.currentImage} alt="" />
+          <img src={largeImageURL} alt={tags} />
         </div>
       </div>
     );

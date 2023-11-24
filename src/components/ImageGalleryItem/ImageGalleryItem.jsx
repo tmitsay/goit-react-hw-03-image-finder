@@ -35,7 +35,7 @@ export class ImageGalleryItem extends Component {
         />
         {isModalOpen && (
           <Modal
-            largeImageImageURL={image.largeImageImageURL}
+            largeImageURL={image.largeImageURL}
             onClose={this.toggleModal}
           />
         )}

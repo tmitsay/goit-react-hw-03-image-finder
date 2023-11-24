@@ -21,6 +21,7 @@ export class App extends Component {
       searchValue: query,
       images: [],
       currentPage: 1,
+      totalPage: 0,
     });
   };
 
@@ -39,6 +40,7 @@ export class App extends Component {
       this.setState(state => ({
         images: [...state.images, ...data.hits],
         isLoading: false,
+        totalPage: Math.ceil(data.totalHits / 12),
         error: '',
       }));
     } catch (error) {
@@ -58,7 +60,7 @@ export class App extends Component {
   }
 
   render() {
-    const { images, isLoading, error } = this.state;
+    const { images, isLoading, totalPage, currentPage, error } = this.state;
     return (
       <div className={css.app}>
         <Searchbar onSubmit={this.onSubmit} />
@@ -68,7 +70,7 @@ export class App extends Component {
 
         <ImageGallery images={images} />
 
-        {images.length > 0 && !isLoading && (
+        {images.length > 0 && totalPage !== currentPage && !isLoading && (
           <Button onClick={this.onLoadMore} />
         )}
       </div>
